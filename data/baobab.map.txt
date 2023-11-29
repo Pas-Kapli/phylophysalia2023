@@ -1,0 +1,10 @@
+Adi001	Adig
+Adi002	Adig
+Aga001	Agra
+Aga002	Agra
+Age001	Agre
+Ama006	Amad
+Ama018	Amad
+Aru001	Arub
+Aru127	Arub
+Smi165	Smic
