@@ -1,0 +1,6 @@
+Adig:Adi001,Adi002
+Agra:Aga001,Aga002	
+Agre:Age001	
+Amad:Ama006,Ama018	
+Arub:Aru001,Aru127	
+Smic:Smi165	
