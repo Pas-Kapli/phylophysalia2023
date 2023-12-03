@@ -25,7 +25,7 @@ def savage_dickey(cutoff, column, alpha, beta, mcmc_filename):
 if __name__ == "__main__":
   if len(sys.argv) != 6:
     print(" usage: " + sys.argv[0] + " cutoff column beta_prior_a beta_prior_b mcmcfile")
-    print(" example: " + sys.argv[0] + "0.01 \"phi_x<-w\" 1 1 mcmc.model2.txt")
+    print(" example: " + sys.argv[0] + " 0.01 \"phi_x<-w\" 1 1 mcmc.model2.txt")
     sys.exit(0)
 
     # example arguments
