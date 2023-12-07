@@ -1,7 +1,7 @@
           seed =  -1
 
-       seqfile = ../../baobab.phy
-      Imapfile = ../../baobab.map.txt
+       seqfile = ../../../../baobab/baobab.phy
+      Imapfile = ../../../../baobab/baobab.map.txt
        outfile = out.model2.txt
       mcmcfile = mcmc.model2.txt
 
