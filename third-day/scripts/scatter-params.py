@@ -4,45 +4,27 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import sys
 
-def plot_taus(data1,data2):
+def plot_data(data1,data2,param_prefix,title,savefile):
   # get all columns that start with "tau"  (tau parameters)
-  taucols = list(filter(lambda x: x.startswith("tau"), data1.columns.values))
+  cols = list(filter(lambda x: x.startswith(param_prefix), data1.columns.values))
+  if len(cols) == 0:
+    return
 
   # get the mean of each column and put them in a dataframe
-  tau1_means = data1[taucols].mean()
-  tau2_means = data2[taucols].mean()
-  tau_means = pd.concat([tau1_means, tau2_means], axis=1, keys=["tau1", "tau2"])
+  means1 = data1[cols].mean()
+  means2 = data2[cols].mean()
+  tau_means = pd.concat([means1, means2], axis=1, keys=["key1", "key2"])
 
   # plot the means, set equal axes, and save the figure
-  plt.scatter(tau_means["tau1"], tau_means["tau2"], color="blue")
-  maxval = max(tau_means["tau1"].max(), tau_means["tau2"].max())*1.01
+  plt.scatter(tau_means["key1"], tau_means["key2"], color="blue")
+  maxval = max(tau_means["key1"].max(), tau_means["key2"].max())*1.01
   plt.xlim(0,maxval)
   plt.ylim(0,maxval)
   plt.plot([0,maxval],[0,maxval],color="black",linestyle="dashed")
-  plt.title('tau posterior means')
+  plt.title(title)
   plt.xlabel(sys.argv[1])
   plt.ylabel(sys.argv[2])
-  plt.savefig("taus.pdf", format='pdf')
-
-def plot_thetas(data1,data2):
-  # get all columns that start with "theta"  (theta parameters)
-  thetacols = list(filter(lambda x: x.startswith("theta"), data1.columns.values))
-
-  # get the mean of each column and put them in a dataframe
-  theta1_means = data1[thetacols].mean()
-  theta2_means = data2[thetacols].mean()
-  theta_means = pd.concat([theta1_means, theta2_means], axis=1, keys=["theta1", "theta2"])
-
-  # plot the means, set equal axes, and save the figure
-  plt.scatter(theta_means["theta1"], theta_means["theta2"], color="blue")
-  maxval = max(theta_means["theta1"].max(), theta_means["theta2"].max())*1.01
-  plt.xlim(0,maxval)
-  plt.ylim(0,maxval)
-  plt.plot([0,maxval],[0,maxval],color="black",linestyle="dashed")
-  plt.title('theta posterior means')
-  plt.xlabel(sys.argv[1])
-  plt.ylabel(sys.argv[2])
-  plt.savefig("thetas.pdf", format='pdf')
+  plt.savefig(savefile, format='pdf')
 
 def read_data(filename1,filename2):
   data1 = pd.read_table(filename1, delim_whitespace=True)
@@ -59,5 +41,6 @@ if __name__ == "__main__":
   data1, data2 = read_data(sys.argv[1],sys.argv[2])
 
   # create scatterplots for taus and thetas
-  plot_taus(data1,data2)
-  plot_thetas(data1,data2)
+  plot_data(data1,data2,"tau","tau posterior means","taus.pdf")
+  plot_data(data1,data2,"theta","theta posterior means","thetas.pdf")
+  plot_data(data1,data2,"phi","phi posterior means","phis.pdf")
