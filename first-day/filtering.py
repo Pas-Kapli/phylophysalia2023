@@ -50,7 +50,6 @@ def average_differences(sequences):
                 )
                 diffs.append(pair_diff / valid_bases if valid_bases > 0 else 0)
         avg_diffs.append(sum(diffs) / len(diffs) if diffs else 0)
-    print(avg_diffs)
     return avg_diffs
 
 
@@ -63,8 +62,6 @@ def filter_by_average_differences(headers, sequences, threshold):
     filtered_seqs = [
         seq for seq, diff in zip(sequences, avg_diffs) if diff < threshold
     ]
-    print(threshold)
-    #print(filtered_seqs)
     return filtered_headers, filtered_seqs
 
 
@@ -123,10 +120,10 @@ def main():
 
     # Parse input FASTA
     headers, sequences = parse_fasta(args.input_file)
-    print(1, headers, sequences)
+    #print(1, headers, sequences)
     # Step 1: Filter by average differences
     headers, sequences = filter_by_average_differences(headers, sequences, args.diff_threshold)
-    print(2, headers, sequences)
+    #print(2, headers, sequences)
     # Step 2: Filter by missing data
     headers, sequences = filter_by_missing_data(headers, sequences, args.missing_threshold)
 
